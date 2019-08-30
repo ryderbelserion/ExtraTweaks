@@ -32,13 +32,14 @@ public class DenySpawnerGuard implements Listener {
         if (e.isCancelled()) return;
 
         Player p = e.getPlayer();
+        BlockFace block = e.getBlockFace();
         ItemStack inHand = p.getItemInHand();
 
         if (inHand == null) return;
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (!inHand.getType().equals(spawner)) {
-                if (e.getBlockFace().equals(BlockFace.UP) || e.getBlockFace().equals(BlockFace.DOWN)) return;
+                if (block.equals(BlockFace.UP) || block.equals(BlockFace.DOWN)) return;
 
                 if (!Objects.requireNonNull(e.getClickedBlock()).getType().equals(spawner)) return;
 
@@ -68,8 +69,8 @@ public class DenySpawnerGuard implements Listener {
 
         if (blockPlaced.getType() == spawner) {
             for (BlockFace blockFace : blockFaces) {
-                if (e.getBlockPlaced().getRelative(blockFace).getType() != spawner) {
-                    if (e.getBlockPlaced().getRelative(blockFace).getType() != Material.AIR) {
+                if (blockPlaced.getRelative(blockFace).getType() != spawner) {
+                    if (blockPlaced.getRelative(blockFace).getType() != Material.AIR) {
                         e.setCancelled(true);
                         p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
                         return;
@@ -78,7 +79,7 @@ public class DenySpawnerGuard implements Listener {
             }
         } else if (blockPlaced.getType() != spawner) {
             for (BlockFace blockFace : blockFaces) {
-                if (e.getBlockPlaced().getRelative(blockFace).getType() == spawner) {
+                if (blockPlaced.getRelative(blockFace).getType() == spawner) {
                     e.setCancelled(true);
                     p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
                     return;
