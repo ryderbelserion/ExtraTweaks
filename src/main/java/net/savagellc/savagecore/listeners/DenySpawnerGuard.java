@@ -1,8 +1,8 @@
 package net.savagellc.savagecore.listeners;
 
 import net.savagellc.savagecore.persist.Conf;
-import net.savagellc.savagecore.persist.enums.Messages;
 import net.prosavage.baseplugin.XMaterial;
+import net.savagellc.savagecore.persist.Messages;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class DenySpawnerGuard implements Listener {
 
@@ -26,12 +27,12 @@ public class DenySpawnerGuard implements Listener {
     @EventHandler
     public void spawnerPlacement(PlayerInteractEvent e) {
 
-        if (!Conf.preventSpawnerProtection) return;
+        if (!Conf.denySpawnerProtection) return;
 
         if (e.isCancelled()) return;
 
-        Player player = e.getPlayer();
-        ItemStack inHand = player.getItemInHand();
+        Player p = e.getPlayer();
+        ItemStack inHand = p.getItemInHand();
 
         if (inHand == null) return;
 
@@ -39,16 +40,16 @@ public class DenySpawnerGuard implements Listener {
             if (!inHand.getType().equals(spawner)) {
                 if (e.getBlockFace().equals(BlockFace.UP) || e.getBlockFace().equals(BlockFace.DOWN)) return;
 
-                if (!e.getClickedBlock().getType().equals(spawner)) return;
+                if (!Objects.requireNonNull(e.getClickedBlock()).getType().equals(spawner)) return;
 
                 e.setCancelled(true);
-                player.sendMessage(Messages.NO_SPAWNER_PROTECTION.getMessage());
+                p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
             } else if (inHand.getType().equals(spawner)) {
-                if (e.getClickedBlock().getType().equals(spawner)) return;
+                if (Objects.requireNonNull(e.getClickedBlock()).getType().equals(spawner)) return;
 
                 if (e.getBlockFace().equals(BlockFace.UP) || e.getBlockFace().equals(BlockFace.DOWN)) return;
                 e.setCancelled(true);
-                player.sendMessage(Messages.NO_SPAWNER_PROTECTION.getMessage());
+                p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
             }
         }
     }
@@ -56,12 +57,12 @@ public class DenySpawnerGuard implements Listener {
     @EventHandler
     public void spawnerProtectionCheck(BlockPlaceEvent e) {
 
-        if (!Conf.preventSpawnerProtection) return;
+        if (!Conf.denySpawnerProtection) return;
 
         if (e.isCancelled()) return;
 
         Block blockPlaced = e.getBlockPlaced();
-        Player player = e.getPlayer();
+        Player p = e.getPlayer();
 
         if (blockPlaced == null) return;
 
@@ -70,7 +71,7 @@ public class DenySpawnerGuard implements Listener {
                 if (e.getBlockPlaced().getRelative(blockFace).getType() != spawner) {
                     if (e.getBlockPlaced().getRelative(blockFace).getType() != Material.AIR) {
                         e.setCancelled(true);
-                        player.sendMessage(Messages.NO_SPAWNER_PROTECTION.getMessage());
+                        p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
                         return;
                     }
                 }
@@ -79,7 +80,7 @@ public class DenySpawnerGuard implements Listener {
             for (BlockFace blockFace : blockFaces) {
                 if (e.getBlockPlaced().getRelative(blockFace).getType() == spawner) {
                     e.setCancelled(true);
-                    player.sendMessage(Messages.NO_SPAWNER_PROTECTION.getMessage());
+                    p.sendMessage(Messages.prefix + Messages.noSpawnerProtection.toString());
                     return;
                 }
             }
