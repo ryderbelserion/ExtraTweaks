@@ -1,6 +1,6 @@
 package net.savagellc.savagecore.listeners;
 
-import net.savagellc.savagecore.persist.Conf;
+import net.savagellc.savagecore.persist.Config;
 import net.prosavage.baseplugin.XMaterial;
 import net.savagellc.savagecore.persist.Messages;
 import org.bukkit.Material;
@@ -27,7 +27,7 @@ public class DenySpawnerGuard implements Listener {
     @EventHandler
     public void spawnerPlacement(PlayerInteractEvent e) {
 
-        if (!Conf.denySpawnerProtection) return;
+        if (!Config.denySpawnerProtection) return;
 
         if (e.isCancelled()) return;
 
@@ -57,7 +57,7 @@ public class DenySpawnerGuard implements Listener {
     @EventHandler
     public void spawnerProtectionCheck(BlockPlaceEvent e) {
 
-        if (!Conf.denySpawnerProtection) return;
+        if (!Config.denySpawnerProtection) return;
 
         if (e.isCancelled()) return;
 
