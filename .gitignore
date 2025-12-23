@@ -1,20 +1,9 @@
-.classpath
+### Intellij
+.kotlin
+.idea
+!.idea/icon.png
 
-.project
-
-.settings/
-
-*.xml
-
-\.idea/
-
-*.iml
-
-*.lst
-
-*.properties
-
-*.jar
-
-*.class
-/target/
+### Gradle
+.gradle
+build/
+run/
