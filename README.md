@@ -1,33 +1,23 @@
-# SavageCore
+## ExtraTweaks
+A bundle of miscellanous tweaks for your server!
 
-WIKI: https://wiki.prosavage.net/display/SAV/Getting+Started
+### Downloads
+https://modrinth.com/project/extratweaks
 
+### Contact
+[![Join us on Discord](https://discord.com/api/guilds/931330926653358090/widget.png?style=banner2)](https://discord.gg/ktxCyUd7Ny)
 
-A recode of SavageCoreX that will have more features released as time goes on.
+### Features
+- N/A
 
-# Current Features # 
-- DenyBabyMobs
-- DenyBlazeDrowning
-- DenyEndermanAI
-- DenyFireSpread
-- DenyFireSpread
-- DenyIPPost
-- DenyIceMelt
-- DenyItemBurn
-- DenyMobItemPickUp
-- DenyPearlGlitch
-- DenySpawnerGuard
-- DenySpawnerStorage
-- DenyWaterItems
-- DenyWeather
-- DenyRespawnScreen
-- FastIceBreak
-- FastIronGolemDeath
-- BloodSpray
-- NoHitDelay
+### Installation
+1) Place ExtraTweaks inside your server's `plugins` folder
+2) Restart your server
+3) Edit the config(s) to your liking
+4) Reload the plugin
 
-# Optional Dependencies #
-- IllyriaFactions
-- IllyriaFactionsX
-
-- The features that won't work without IllyriaFactions/IllyriaFactionsX are DenySpawnerStorage, DenySpawnerGuard.
+## Permissions
+| Node                          | Description                                          | Default |
+|-------------------------------|------------------------------------------------------|---------|
+| `extratweaks.reload`        | `the reload command`                                 | op      |
+| `extratweaks.help`          | `help command`                                       | op      |
